@@ -1,7 +1,5 @@
 "use client";
 
-interface NavbarProps {}
-
-export default function Navbar({}: NavbarProps) {
+export default function Navbar() {
   return <nav id="navbar" />;
 }
