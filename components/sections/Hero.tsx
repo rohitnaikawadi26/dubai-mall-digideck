@@ -23,7 +23,7 @@ export default function Hero() {
         preload="auto"
         aria-hidden="true"
       >
-        <source src="/Hero%20Vedio.mp4" type="video/mp4" />
+        <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />

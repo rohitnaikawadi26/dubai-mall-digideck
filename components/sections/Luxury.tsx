@@ -79,7 +79,7 @@ export default function Luxury() {
           preload="auto"
           aria-hidden="true"
         >
-          <source src="/Luxury%20section%20Vedio.mp4" type="video/mp4" />
+          <source src="/luxury-section-video.mp4" type="video/mp4" />
         </video>
         <motion.div
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.12),transparent_45%),linear-gradient(to_bottom,rgba(5,5,5,0.65),rgba(0,0,0,0.9))]"

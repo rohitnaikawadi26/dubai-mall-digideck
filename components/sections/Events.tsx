@@ -12,10 +12,10 @@ type EventItem = {
 
 /** Modal preview: dedicated file per timeline row (`public/`). */
 const eventModalVideoMap: Record<EventItem["id"], string> = {
-  concerts: "/Concert_inside_shopping_mall_202604301436.mp4",
-  activations: "/Brand%20Activation.mp4",
-  launches: "/Product%20Launches.mp4",
-  corporate: "/Corporate%20Event.mp4",
+  concerts: "/concert-inside.mp4",
+  activations: "/brand-activation.mp4",
+  launches: "/product-launches.mp4",
+  corporate: "/corporate-event.mp4",
 };
 
 type TimelineItemProps = {
@@ -166,7 +166,7 @@ export default function Events() {
         preload="auto"
         aria-hidden="true"
       >
-        <source src="/Concert_inside_shopping_mall_202604301436.mp4" type="video/mp4" />
+        <source src="/concert-inside.mp4" type="video/mp4" />
       </video>
       <div
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.08),transparent_50%),linear-gradient(to_bottom,rgba(7,7,7,0.7),rgba(0,0,0,0.9))]"
@@ -269,7 +269,7 @@ export default function Events() {
                     aria-hidden="true"
                   >
                     <source
-                      src={active ? eventModalVideoMap[active.id] : "/Concert_inside_shopping_mall_202604301436.mp4"}
+                      src={active ? eventModalVideoMap[active.id] : "/concert-inside.mp4"}
                       type="video/mp4"
                     />
                   </video>

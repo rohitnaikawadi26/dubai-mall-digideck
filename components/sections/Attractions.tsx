@@ -14,10 +14,10 @@ type Attraction = {
 
 /** Modal preview: one dedicated file per hotspot in `public/`. */
 const attractionVideoMap: Record<Attraction["id"], string> = {
-  aquarium: "/Dubai_Aquarium.mp4",
-  ice: "/Dubai_mall_ice_rink.mp4",
-  vr: "/VR_Theme_Park.mp4",
-  fountain: "/Dubai%20Fountain.mp4",
+  aquarium: "/dubai-aquarium.mp4",
+  ice: "/dubai-mall-ice-rink.mp4",
+  vr: "/vr-theme-park.mp4",
+  fountain: "/dubai-fountain.mp4",
 };
 
 export default function Attractions() {
@@ -144,7 +144,7 @@ export default function Attractions() {
               preload="auto"
               aria-hidden="true"
             >
-              <source src="/Busy_shopping_mall_interior_people.mp4" type="video/mp4" />
+              <source src="/busy-shopping-mall-interior.mp4" type="video/mp4" />
             </video>
             <div
               className="absolute inset-0 rounded-[28px] opacity-70 [background-image:linear-gradient(to_right,rgba(212,175,55,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(212,175,55,0.10)_1px,transparent_1px)] [background-size:160px_160px]"
@@ -269,7 +269,7 @@ export default function Attractions() {
                     preload="auto"
                     aria-hidden="true"
                   >
-                    <source src={active ? attractionVideoMap[active.id] : "/Busy_shopping_mall_interior_people.mp4"} type="video/mp4" />
+                    <source src={active ? attractionVideoMap[active.id] : "/busy-shopping-mall-interior.mp4"} type="video/mp4" />
                   </video>
                 </div>
               </div>
