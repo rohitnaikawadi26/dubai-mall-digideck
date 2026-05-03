@@ -1,7 +1,7 @@
 # Dubai Mall Digideck
 
 ## Live Demo
-👉 **[Click Here to View Live Demo](https://dubai-mall-digideck-lckh.vercel.app/)** 👈
+👉 **[Click Here to View Live Demo]([https://dubai-mall-digideck.vercel.app/])** 👈
 
 > **Note for Evaluators:** For a deep dive into the UX strategy, technical architecture, and business decisions behind this project, please read the full **[Case Study](./CASE_STUDY.md)**.
 
