@@ -51,7 +51,7 @@ function LuxuryPanel({ data, index, total, progress }: LuxuryPanelProps) {
           <div className="mx-auto mb-10 h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" aria-hidden="true" />
           
           <h2 className="text-balance text-6xl font-light leading-tight tracking-tight text-white/95 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] sm:text-7xl md:text-[5.5rem]">
-            Where the World's Most <br className="hidden md:block"/>
+            Where the World&apos;s Most <br className="hidden md:block"/>
             <span className="bg-gradient-to-br from-[#FFDF73] via-[#D4AF37] to-[#997A15] bg-clip-text font-semibold text-transparent drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]">
               Iconic Brands
             </span> Belong
