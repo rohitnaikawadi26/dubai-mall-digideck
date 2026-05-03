@@ -3,6 +3,8 @@
 ## Live Demo
 [View Live Project](your-deployed-link)
 
+> **Note for Evaluators:** For a deep dive into the UX strategy, technical architecture, and business decisions behind this project, please read the full **[Case Study](./CASE_STUDY.md)**.
+
 ## Project Overview
 
 Dubai Mall Digideck is a browser-based, interactive sales platform built to present a mega retail destination as a high-value commercial opportunity.
