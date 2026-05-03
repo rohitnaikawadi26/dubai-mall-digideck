@@ -1,7 +1,7 @@
 # Dubai Mall Digideck
 
 ## Live Demo
-[View Live Project](your-deployed-link)
+[View Live Project]([https://dubai-mall-digideck-lckh.vercel.app/])
 
 ## Project Overview
 
