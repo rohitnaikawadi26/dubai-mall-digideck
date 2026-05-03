@@ -64,6 +64,7 @@ export default function Attractions() {
   );
 
   const [activeId, setActiveId] = useState<Attraction["id"] | null>(null);
+  const [hoveredId, setHoveredId] = useState<Attraction["id"] | null>("aquarium");
   const active = activeId ? attractions.find((a) => a.id === activeId) : null;
 
   useEffect(() => {
@@ -151,23 +152,25 @@ export default function Attractions() {
               aria-hidden="true"
             />
 
-            {attractions.map((a) => (
+            {attractions.map((a, index) => {
+              const isHovered = hoveredId === a.id;
+              
+              return (
               <div
                 key={a.id}
-                className="absolute"
+                className={`absolute transition-all duration-500 ${isHovered ? 'z-20' : 'z-10'}`}
                 style={{ left: a.x, top: a.y, transform: "translate(-50%, -50%)" }}
               >
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.5 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <motion.div
+                  <div
                     className="group relative"
-                    initial="rest"
-                    animate="rest"
-                    whileHover="hover"
+                    onMouseEnter={() => setHoveredId(a.id)}
+                    // We intentionally don't reset hoveredId on mouse leave so one is always visible
                   >
                     <motion.div
                       role="button"
@@ -177,43 +180,56 @@ export default function Attractions() {
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") setActiveId(a.id);
                       }}
-                      whileHover={{ scale: 1.08 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="relative h-4 w-4 cursor-pointer rounded-full bg-[#d4af37]/90 shadow-[0_0_0_6px_rgba(212,175,55,0.12),0_10px_30px_rgba(0,0,0,0.45)] outline-none ring-0 transition"
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-black/40 text-white shadow-xl backdrop-blur-md transition-colors duration-300 ${isHovered ? 'border-[#d4af37] bg-[#d4af37] text-black' : 'hover:bg-[#d4af37]/80 hover:text-black'}`}
                     >
-                      <span
-                        className="absolute inset-0 rounded-full bg-[#d4af37]/70 blur-[10px]"
-                        aria-hidden="true"
+                      <span className="text-lg font-light leading-none">+</span>
+                      
+                      <motion.div
+                        className="absolute inset-0 rounded-full border border-[#d4af37]/80"
+                        animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: index * 0.3 }}
                       />
                     </motion.div>
 
-                    <motion.div
-                      className="pointer-events-none absolute left-1/2 top-7 w-[260px] -translate-x-1/2 rounded-2xl border border-white/10 bg-black/65 px-4 py-3 backdrop-blur-md"
-                      variants={{
-                        rest: { opacity: 0, y: 8, scale: 0.98 },
-                        hover: { opacity: 1, y: 0, scale: 1 },
-                      }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <div className="text-sm font-semibold tracking-[0.08em] text-white/90">
-                        {a.title}
-                      </div>
-                      <div className="mt-1 text-sm leading-snug text-white/65">
-                        {a.preview}
-                      </div>
-                      <div className="mt-3 h-px w-10 bg-[#d4af37]/60" aria-hidden="true" />
-                    </motion.div>
-                  </motion.div>
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          className="pointer-events-none absolute left-1/2 top-12 w-[280px] -translate-x-1/2 rounded-2xl border border-white/15 bg-black/80 px-5 py-4 shadow-[0_20px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <div className="text-xs font-bold uppercase tracking-[0.15em] text-[#d4af37]">
+                            {a.title}
+                          </div>
+                          <div className="mt-2 text-sm font-medium leading-relaxed text-white/90">
+                            {a.preview}
+                          </div>
+                          <div className="mt-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-white/50">
+                            <span>Click for details</span>
+                            <span className="h-px w-6 bg-[#d4af37]/50" />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               </div>
-            ))}
+            )})}
 
             <div
-              className="absolute bottom-6 left-6 hidden items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-white/45 sm:flex"
+              className="absolute bottom-8 left-8 hidden items-center gap-4 text-xs font-semibold uppercase tracking-[0.25em] text-white/90 drop-shadow-md sm:flex"
               aria-hidden="true"
             >
-              <span className="h-px w-10 bg-[#d4af37]/60" />
-              Explore attractions
+              <motion.span 
+                className="h-px w-12 bg-[#d4af37]" 
+                animate={{ width: ["2rem", "4rem", "2rem"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              INTERACT TO EXPLORE
             </div>
           </motion.div>
         </div>
@@ -261,6 +277,7 @@ export default function Attractions() {
                 </div>
                 <div className="mt-4 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10">
                   <video
+                    key={active?.id || "empty"}
                     className="h-full w-full object-cover"
                     autoPlay
                     loop

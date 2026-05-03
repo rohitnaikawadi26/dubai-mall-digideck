@@ -30,8 +30,8 @@ function TimelineItem({ item, index, total, progress, onOpen }: TimelineItemProp
   const start = index / total;
   const end = (index + 1) / total;
   const local = useTransform(progress, [start, end], [0, 1]);
-  const opacity = useTransform(local, [0, 0.3, 1], [0.25, 0.75, 1]);
-  const x = useTransform(local, [0, 1], [20, 0]);
+  const opacity = useTransform(local, [0, 0.3, 1], [0.35, 0.75, 1]);
+  const x = useTransform(local, [0, 1], [30, 0]);
 
   return (
     <motion.div
@@ -41,18 +41,30 @@ function TimelineItem({ item, index, total, progress, onOpen }: TimelineItemProp
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") onOpen(item.id);
       }}
-      className="group relative cursor-pointer pl-10 outline-none"
+      className="group relative cursor-pointer pl-12 py-2 outline-none"
       style={{ opacity, x }}
-      whileHover={{ x: 4, scale: 1.01 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ x: 8 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <span className="absolute left-0 top-2 h-[22px] w-[22px] rounded-full border border-white/30 bg-black">
-        <span className="absolute inset-[5px] rounded-full bg-white/80 transition-colors duration-500 group-hover:bg-[#d4af37]" />
+      {/* Outer ring */}
+      <span className="absolute left-0 top-4 h-6 w-6 rounded-full border border-white/20 bg-black/50 backdrop-blur-sm transition-colors duration-500 group-hover:border-[#d4af37]/60">
+        {/* Inner dot */}
+        <span className="absolute inset-[6px] rounded-full bg-white/40 transition-all duration-500 group-hover:bg-[#d4af37] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.8)]" />
       </span>
-      <h3 className="text-2xl font-semibold leading-tight tracking-[0.01em] text-white/92 sm:text-3xl">
-        {item.title}
-      </h3>
-      <div className="mt-2 h-px w-12 bg-white/20 transition-all duration-500 group-hover:w-24 group-hover:bg-[#d4af37]/70" />
+      
+      <div className="flex items-center gap-4">
+        <h3 className="text-3xl font-semibold leading-tight tracking-[0.01em] text-white/80 transition-colors duration-500 group-hover:text-[#d4af37] sm:text-4xl">
+          {item.title}
+        </h3>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 opacity-0 backdrop-blur-md transition-all duration-500 group-hover:opacity-100 group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/20 group-hover:text-[#d4af37]">
+           <svg className="ml-0.5 h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      
+      <p className="mt-2 text-xs font-semibold tracking-[0.15em] uppercase text-white/30 transition-colors duration-500 group-hover:text-[#d4af37]/80">
+        Click to view gallery
+      </p>
+      <div className="mt-4 h-px w-12 bg-white/10 transition-all duration-500 group-hover:w-32 group-hover:bg-[#d4af37]/50" />
     </motion.div>
   );
 }
@@ -260,6 +272,7 @@ export default function Events() {
                 </div>
                 <div className="mt-4 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10">
                   <video
+                    key={active?.id || "empty"}
                     className="h-full w-full object-cover"
                     autoPlay
                     loop
